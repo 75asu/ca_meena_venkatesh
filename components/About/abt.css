@@ -1,0 +1,310 @@
+.about-section {
+  padding: 40px;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.gradient-pill {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  padding: 8px 24px;
+  border-radius: 50px;
+  color: white;
+  font-weight: 700;
+}
+
+/* Main Content Layout */
+.about-content {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 80px;
+}
+
+/* Profile Image */
+.profile-image-container {
+  flex-shrink: 0;
+}
+
+.profile-image-frame {
+  width: 350px;
+  height: 400px;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* About Details */
+.about-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-description,
+.about-passion {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+  margin: 0;
+}
+
+/* Skills Section */
+.skills-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.skill-bar {
+  width: 100%;
+  height: 8px;
+  background: #374151;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.skill-progress[data-skill="95"] {
+  width: 95%;
+}
+
+.skill-progress[data-skill="90"] {
+  width: 90%;
+}
+
+.skill-progress[data-skill="92"] {
+  width: 92%;
+}
+
+.skill-progress[data-skill="88"] {
+  width: 88%;
+}
+
+/* Statistics Section */
+.stats-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 20px 0;
+}
+
+.stat-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #9ca3af;
+  letter-spacing: 1px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 60px;
+  background: #374151;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 20px;
+  }
+
+  .about-content {
+    flex-direction: column;
+    gap: 40px;
+    text-align: left;
+  }
+
+  /* Hide profile image on mobile view */
+  .profile-image-container {
+    display: none;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  /* Adjust section header margin for mobile */
+  .section-header {
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  /* Updated skills section for mobile to show skill names with progress bars */
+  .skills-section {
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .skill-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+  }
+
+  /* Show skill bars on mobile view */
+  .skill-bar {
+    display: block;
+    width: 100%;
+    height: 8px;
+    background: #374151;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .skill-progress[data-skill="95"] {
+    width: 95%;
+  }
+
+  .skill-progress[data-skill="90"] {
+    width: 90%;
+  }
+
+  .skill-progress[data-skill="92"] {
+    width: 92%;
+  }
+
+  .skill-progress[data-skill="88"] {
+    width: 88%;
+  }
+
+  /* Updated stats section for horizontal mobile layout */
+  .stats-section {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 0 20px 0;
+  }
+
+  .stat-item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 60px;
+    background: #374151;
+  }
+
+  .stat-number {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 40px 15px;
+  }
+
+  /* Further reduce spacing for very small screens */
+  .section-header {
+    margin-bottom: 30px;
+  }
+
+  .about-details {
+    gap: 30px;
+  }
+
+  .stats-section {
+    gap: 20px;
+    padding: 20px 0 20px 0;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
