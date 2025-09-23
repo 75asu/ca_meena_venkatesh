@@ -12,7 +12,7 @@ const ContactSection = () => {
     email: "",
     message: "",
   })
-  const [newsletterEmail, setNewsletterEmail] = useState("")
+  // const [newsletterEmail, setNewsletterEmail] = useState("")
   const [loading, setLoading] = useState(false)
   const [formMessage, setFormMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
@@ -51,10 +51,10 @@ const ContactSection = () => {
       .finally(() => setLoading(false))
   }
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Newsletter subscription:", newsletterEmail)
-  }
+  // const handleNewsletterSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   console.log("Newsletter subscription:", newsletterEmail)
+  // }
 
   return (
     <section id="contact" className="contact-section">
@@ -156,7 +156,7 @@ const ContactSection = () => {
           </div>
         </div>
 
-        {/* Newsletter Section */}
+        {/* Newsletter Section
         <div className="newsletter-section">
           <div className="newsletter-content">
             <div className="newsletter-info">
@@ -183,7 +183,7 @@ const ContactSection = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
 
         {/* Footer Section */}
         <div className="footer-section">
