@@ -5,7 +5,14 @@ import "./homesection.css"
 import ScrollToTop from "../ScrollTop/layout"
 
 export default function HomeSection() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log("Newsletter subscription:", newsletterEmail)
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -32,7 +39,7 @@ export default function HomeSection() {
               </li>
               <li>
                 <a href="#AboutSection" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-                  About Me
+                  Blog
                 </a>
               </li>
               <li>
@@ -58,7 +65,7 @@ export default function HomeSection() {
               document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
             }}
           >
-            Connect With Me
+            About Me
           </button>
         </div>
       </header>
@@ -77,7 +84,7 @@ export default function HomeSection() {
               I’m a Chartered Accountant with 7+ years of experience helping startups and fast-growing companies achieve
               financial transparency, compliance, and growth.
             </p>
-            <div className="cta-buttons">
+            {/* <div className="cta-buttons">
               <button
                 className="connect-btn"
                 onClick={() => {
@@ -94,7 +101,28 @@ export default function HomeSection() {
               >
                 Book a call
               </a>
-            </div>
+            </div> */}
+
+            {/* Newsletter Section */}
+        <div className="newsletter-section">
+          <div className="newsletter-content">
+            <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+              <div className="newsletter-input-container">
+                <div className="newsletter-icon">✉️</div>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="newsletter-btn">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
           </div>
         </div>
         <ScrollToTop />
