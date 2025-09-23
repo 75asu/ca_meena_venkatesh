@@ -92,7 +92,7 @@ export default function HomeSection() {
                 rel="noopener noreferrer"
                 className="secondary-btn"
               >
-                Let's Sync
+                Book a call
               </a>
             </div>
           </div>
