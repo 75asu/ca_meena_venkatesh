@@ -62,14 +62,14 @@ export default function HomeSection() {
               </li>
             </ul>
           </nav>
-          <button
+          {/* <button
             className="connect-btn"
             onClick={() => {
               document.getElementById("AboutSection").scrollIntoView({ behavior: "smooth" })
             }}
           >
             About Me
-          </button>
+          </button> */}
         </div>
       </header>
 

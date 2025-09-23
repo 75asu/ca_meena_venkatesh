@@ -1,5 +1,5 @@
-import Newsletter from '../../../components/news-letter/news-letter';
-import { NewsletterItem } from '../../../dto/new-letter-item';
+import Newsletter from '../../components/news-letter/news-letter';
+import { NewsletterItem } from '../../dto/new-letter-item';
 
 const sampleData: NewsletterItem[] = [
   {
@@ -48,6 +48,6 @@ const sampleData: NewsletterItem[] = [
   }
 ];
 
-export default function Blogs() {
+export default function Page() {
   return <Newsletter items={sampleData} />;
 }

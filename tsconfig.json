@@ -11,7 +11,7 @@
         "./*"
       ]
     },
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
@@ -34,7 +34,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/blogs/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]

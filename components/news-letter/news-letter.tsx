@@ -1,8 +1,17 @@
 // components/Newsletter.tsx
 import React from 'react';
 import NewsletterCard from '../news-letter-card/news-letter-card';
-import { NewsletterItem } from '../../dto/new-letter-item';
 import './news-letter.css';
+
+
+interface NewsletterItem {
+  id: string;
+  type: 'idea' | 'quote' | 'question';
+  title: string;
+  preview: string;
+  content: string;
+  author?: string;
+}
 export interface NewsletterProps {
   items: NewsletterItem[];
 }
