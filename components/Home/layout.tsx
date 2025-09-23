@@ -3,6 +3,9 @@
 import { useState } from "react"
 import "./homesection.css"
 import ScrollToTop from "../ScrollTop/layout"
+import Link from "next/link"
+
+
 
 export default function HomeSection() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,9 +41,9 @@ export default function HomeSection() {
                 </a>
               </li>
               <li>
-                <a href="#AboutSection" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-                  Blog
-                </a>
+                <Link href="/blogs" className="nav-link" onClick={() => setIsMenuOpen(false)}>
+                  Blogs
+                </Link>
               </li>
               <li>
                 <a href="#services" className="nav-link" onClick={() => setIsMenuOpen(false)}>
@@ -62,7 +65,7 @@ export default function HomeSection() {
           <button
             className="connect-btn"
             onClick={() => {
-              document.getElementById("contact").scrollIntoView({ behavior: "smooth" })
+              document.getElementById("AboutSection").scrollIntoView({ behavior: "smooth" })
             }}
           >
             About Me
