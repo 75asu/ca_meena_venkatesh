@@ -98,7 +98,7 @@ export default function AboutSection() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {skills.map((skill, index) => (
+            {skills.map((skill) => (
               <div
                 key={skill.name}
                 className="group opacity-0 translate-y-6 animate-fade-in"
