@@ -2,6 +2,8 @@ import React from "react"
 import type { Metadata } from "next"
 import { Suspense } from "react"
 import "./globals.css"
+import Header from "./components/common/header"
+import Footer from "./components/common/footer"
 
 export const metadata: Metadata = {
   title: "Meena - Chartered Accountant",
@@ -16,7 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        <Suspense fallback={null}>{children}</Suspense>
+        <Header />
+        <main className="min-h-[calc(100vh-4rem)]">
+          <Suspense fallback={null}>{children}</Suspense>
+        </main>
+        <Footer />
       </body>
     </html>
   )
