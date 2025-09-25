@@ -1,7 +1,7 @@
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  // output: "export",
   pageExtensions: ["tsx", "ts", "jsx", "js"],
   images: {
     unoptimized: true,
