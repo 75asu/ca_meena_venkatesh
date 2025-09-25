@@ -44,12 +44,7 @@ export default function Page() {
                                 <div className="flex items-start justify-between mb-6">
                                     <span className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-gray-600 to-gray-700 text-gray-100 font-semibold rounded-lg group-hover:from-gray-500 group-hover:to-gray-600 transition-all duration-300 text-lg">
                                         {services[0].id}
-                                    </span>
-                                    {services[0].featured && (
-                                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-medium px-3 py-1 rounded-full">
-                                            Popular
-                                        </span>
-                                    )}
+                                    </span>                                
                                 </div>
 
                                 {/* Content */}
@@ -99,12 +94,7 @@ export default function Page() {
                                 <div className="flex items-start justify-between mb-6">
                                     <span className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-700 text-gray-100 font-semibold rounded-lg group-hover:from-gray-500 group-hover:to-gray-600 transition-all duration-300">
                                         {services[2].id}
-                                    </span>
-                                    {services[2].featured && (
-                                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-medium px-3 py-1 rounded-full">
-                                            Popular
-                                        </span>
-                                    )}
+                                    </span>                                
                                 </div>
 
                                 {/* Content */}

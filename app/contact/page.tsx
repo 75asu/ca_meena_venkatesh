@@ -4,7 +4,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import emailjs from "emailjs-com"
 
-export default function Page(){
+export default function Page() {
   const [mounted, setMounted] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -67,6 +67,13 @@ export default function Page(){
       label: "Location",
       value: "Bengaluru, India",
       delay: "200ms"
+    },
+    {
+      icon: '📆',
+      label: 'Calendly',
+      value: 'Chat & Schedule',
+      link: 'https://calendly.com/meenavenkatesh17/quick-sync',
+      delay: '300ms'
     }
   ]
 
@@ -92,7 +99,7 @@ export default function Page(){
         <div className="grid lg:grid-cols-5 gap-12">
           {/* Contact Information */}
           <div className="lg:col-span-2">
-            <div 
+            <div
               className="opacity-0 translate-y-8 animate-fade-in"
               style={{ animationDelay: "200ms" }}
             >
@@ -102,29 +109,16 @@ export default function Page(){
                   Start Your Journey
                 </h3>
                 <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                  I'm currently available to take on new projects and would love to discuss how 
+                  I'm currently available to take on new projects and would love to discuss how
                   I can help your business achieve financial excellence.
                 </p>
-                <div className="relative p-6 rounded-2xl bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-orange-500/5 border border-purple-500/20 backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-orange-500/5 rounded-2xl blur-sm"></div>
-                  <div className="relative">
-                    <p className="text-gray-300 leading-relaxed">
-                      Whether you're a startup looking to establish robust financial processes 
-                      or a scaling company needing expert compliance support, I'm here to help.
-                    </p>
-                  </div>
-                </div>
               </div>
 
               {/* Contact Details */}
               <div className="space-y-6">
                 <h4 className="text-lg font-semibold text-white mb-6">Get In Touch</h4>
-                {contactDetails.map((contact, index) => (
-                  <div
-                    key={contact.label}
-                    className="group opacity-0 translate-y-6 animate-fade-in"
-                    style={{ animationDelay: contact.delay }}
-                  >
+                {contactDetails.map((contact) => {
+                  const CardContent = (
                     <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300 backdrop-blur-sm">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500/20 to-orange-500/20 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300">
                         {contact.icon}
@@ -136,15 +130,36 @@ export default function Page(){
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+
+                  return (
+                    <div
+                      key={contact.label}
+                      className="group opacity-0 translate-y-6 animate-fade-in"
+                      style={{ animationDelay: contact.delay }}
+                    >
+                      {contact.link ? (
+                        <a
+                          href={contact.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {CardContent}
+                        </a>
+                      ) : (
+                        CardContent
+                      )}
+                    </div>
+                  );
+                })}
+
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-3">
-            <div 
+            <div
               className="opacity-0 translate-y-8 animate-fade-in"
               style={{ animationDelay: "400ms" }}
             >
@@ -238,11 +253,10 @@ export default function Page(){
 
                   {/* Feedback Message */}
                   {formMessage && (
-                    <div className={`p-4 rounded-xl text-center font-medium ${
-                      formMessage.type === "success" 
-                        ? "bg-green-500/10 border border-green-500/30 text-green-400" 
+                    <div className={`p-4 rounded-xl text-center font-medium ${formMessage.type === "success"
+                        ? "bg-green-500/10 border border-green-500/30 text-green-400"
                         : "bg-red-500/10 border border-red-500/30 text-red-400"
-                    }`}>
+                      }`}>
                       {formMessage.text}
                     </div>
                   )}
@@ -253,7 +267,7 @@ export default function Page(){
         </div>
 
         {/* Response Time Promise */}
-        <div 
+        <div
           className="mt-16 text-center opacity-0 translate-y-8 animate-fade-in"
           style={{ animationDelay: "600ms" }}
         >

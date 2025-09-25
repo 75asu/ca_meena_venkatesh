@@ -51,10 +51,6 @@ const ContactSection = () => {
       .finally(() => setLoading(false))
   }
 
-  // const handleNewsletterSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   console.log("Newsletter subscription:", newsletterEmail)
-  // }
 
   return (
     <section id="contact" className="contact-section">

@@ -27,7 +27,7 @@ export default function Page() {
                         
                         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mt-4 leading-relaxed">
                             Below are a few highlights that showcase my expertise and passion for
-                            <span className="text-white font-medium"> delivering value through innovation</span>.
+                            <span className="text-white font-medium"> delivering value through innovation.</span>
                         </p>
                     </div>
 
@@ -58,13 +58,7 @@ export default function Page() {
                                         <h3 className="text-4xl font-light text-white group-hover:text-blue-400 transition-colors duration-300">
                                             {project.title}
                                         </h3>
-                                        <p className="text-gray-400 leading-relaxed">
-                                            {project.description}
-                                        </p>
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-gray-500">{project.year}</span>
-                                            <div className="w-12 h-px bg-gray-700 group-hover:bg-blue-500 group-hover:w-16 transition-all duration-300"></div>
-                                        </div>
+                                        <div className="w-12 h-px bg-gray-700 group-hover:bg-blue-500 group-hover:w-16 transition-all duration-300"></div>
                                     </div>
                                 </div>
                             </div>

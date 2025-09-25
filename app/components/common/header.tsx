@@ -18,30 +18,6 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    // Close menu when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (isMenuOpen && !e.target.closest('nav') && !e.target.closest('button')) {
-                setIsMenuOpen(false)
-            }
-        }
-
-        if (isMenuOpen) {
-            document.addEventListener('click', handleClickOutside)
-        }
-
-        return () => document.removeEventListener('click', handleClickOutside)
-    }, [isMenuOpen])
-
-    const scrollToSection = (sectionId: string) => {
-        closeMenu()
-        if (sectionId.startsWith('#')) {
-            const element = document.getElementById(sectionId.substring(1))
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth" })
-            }
-        }
-    }
 
     return (
         <>
@@ -67,28 +43,14 @@ export default function Header() {
                         {/* Desktop Navigation */}
                         <nav className="hidden md:flex items-center space-x-8">
                             {navItems.map((link) => (
-                                link.href.startsWith('#') ? (
-                                    <button
-                                        key={link.href}
-                                        onClick={() => scrollToSection(link.href)}
-                                        className={`relative px-5 py-3 font-medium text-gray-300 transition-all duration-300 hover:text-white hover:-translate-y-0.5 group
-                      ${link.label === 'Home' ? 'text-white' : ''}
-                    `}
-                                    >
-                                        <span className="relative z-10">{link.label}</span>
-                                        <div className={`absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded transform transition-all duration-300 
-                      ${link.label === 'Home' ? 'scale-x-100 w-4/5 mx-auto' : 'scale-x-0 group-hover:scale-x-75'}`} />
-                                    </button>
-                                ) : (
-                                    <Link
-                                        key={link.href}
-                                        href={link.href}
-                                        className="relative px-5 py-3 font-medium text-gray-300 transition-all duration-300 hover:text-white hover:-translate-y-0.5 group"
-                                    >
-                                        <span className="relative z-10">{link.label}</span>
-                                        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded transform scale-x-0 group-hover:scale-x-75 transition-all duration-300 mx-auto" />
-                                    </Link>
-                                )
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="relative px-5 py-3 font-medium text-gray-300 transition-all duration-300 hover:text-white hover:-translate-y-0.5 group"
+                                >
+                                    <span className="relative z-10">{link.label}</span>
+                                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-500 rounded transform scale-x-0 group-hover:scale-x-75 transition-all duration-300 mx-auto" />
+                                </Link>
                             ))}
                         </nav>
 
@@ -131,11 +93,11 @@ export default function Header() {
 
             {/* Mobile Navigation Menu with enhanced glassmorphism */}
             <nav className={`fixed top-[70px] left-0 right-0 z-40 
-    ${isMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible"} 
-    flex justify-center border border-gray-500/10
-    backdrop-blur-xl
-    shadow-[0_8px_32px_rgba(0,0,0,0.3)] 
-    transition-all duration-300 md:hidden`}
+                ${isMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible"} 
+                flex justify-center border border-gray-500/10
+                backdrop-blur-xl
+                shadow-[0_8px_32px_rgba(0,0,0,0.3)] 
+                transition-all duration-300 md:hidden`}
             >
                 <div className="flex flex-col items-center w-full max-w-md px-6 py-8 space-y-3">
                     {navItems.map((link, index) => (
@@ -152,6 +114,14 @@ export default function Header() {
                             </span>
                         </Link>
                     ))}
+                    <Link
+                        href={'/about'}
+                        onClick={closeMenu}
+                        className="relative overflow-hidden bg-purple-400/20 backdrop-blur-[10px] border border-purple-400/30 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_35px_rgba(139,92,246,0.4)] hover:border-purple-400/50 group"
+                    >
+                        <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 transition-all duration-300 group-hover:left-0 -z-10" />
+                        <span className="relative z-10">About Me</span>
+                    </Link>
                 </div>
             </nav>
 

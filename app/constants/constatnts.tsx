@@ -69,36 +69,31 @@ export const projects = [
             id: 1,
             title: "Manufacturing",
             image: "/manufacturing2.jpg",
-            description: "Industrial automation and smart factory solutions",
-            year: "2024",
+        
         },
         {
             id: 2,
             title: "Crypto",
             image: "/crypto.jpeg",
-            description: "Blockchain and cryptocurrency platforms",
-            year: "2023",
+            
         },
         {
             id: 3,
             title: "Retail",
             image: "/retail.jpeg",
-            description: "E-commerce and retail management systems",
-            year: "2023",
+            
         },
         {
             id: 4,
             title: "SaaS",
             image: "/saas.jpeg",
-            description: "Software as a Service platforms",
-            year: "2024",
+            
         },
         {
             id: 5,
             title: "Web3",
             image: "/web3.jpg",
-            description: "Decentralized applications and smart contracts",
-            year: "2024",
+            
         },
     ];
 export   const skills = [
