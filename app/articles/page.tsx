@@ -4,7 +4,7 @@ import Link from "next/link";
 import {  HiUser, HiClock } from "react-icons/hi";
 
 // Revalidate every 1 hour (ISR)
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export default async function Page() {
   const posts = await getSubstackRSS();

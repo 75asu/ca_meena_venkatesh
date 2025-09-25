@@ -7,27 +7,32 @@ import { personalInfo } from "./constants/constatnts"
 
 export default function Home() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!newsletterEmail) return;
+    setLoading(true);
 
-  try {
-    const response = await fetch("/api/subscribe", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: newsletterEmail }),
-    });
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.success) {
-      setNewsletterEmail("");
-    } else {
-      console.error(`❌ Subscription failed: ${data.error || "Unknown error"}`);
+      if (data.success) {
+        setNewsletterEmail("");
+      } else {
+        console.error(`❌ Subscription failed: ${data.error || "Unknown error"}`);
+      }
+    } catch (err) {
+      console.error("Subscription error:", err);
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Subscription error:", err);
-  }
   }
 
   return (
@@ -58,7 +63,7 @@ export default function Home() {
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-            href={'/contact'}
+              href={'/contact'}
               className="bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 text-white border-none px-8 py-4 rounded-full text-lg font-semibold cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_15px_30px_rgba(139,92,246,0.4)] flex items-center gap-2"
             >
               <HiOutlineCalendar className="w-5 h-5 inline-block" />
@@ -99,9 +104,10 @@ export default function Home() {
               {/* Subscribe Button */}
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-none px-6 py-3 rounded-xl font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(139,92,246,0.4)] whitespace-nowrap"
               >
-                Subscribe
+                {loading ? "Subscribing..." : "Subscribe"}
               </button>
             </form>
             {/* Tagline with bottom border */}
