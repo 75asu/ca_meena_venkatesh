@@ -18,3 +18,7 @@ html, body {
 .animate-fade-in {
   animation: fade-in 0.5s forwards;
 }
+
+.use-theme-bg {
+    background: none !important;
+}

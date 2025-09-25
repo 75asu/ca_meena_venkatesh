@@ -25,24 +25,27 @@ export async function getSubstackRSS(): Promise<FeedItem[]> {
   });
 
   try {
-    console.log("🔄 Fetching latest RSS feed from Substack...");
     
     // Add cache-busting parameter to ensure fresh data
     const rssUrl = `https://sujitgouda.substack.com/feed?t=${Date.now()}`;
     
     const feed = await parser.parseURL(rssUrl);
-    
-    console.log(`✅ Successfully fetched ${feed.items.length} articles from RSS feed`);
-    
-    // Log the latest article for debugging
-    if (feed.items.length > 0) {
-      const latestArticle = feed.items[0];
-      console.log(`📰 Latest article: "${latestArticle.title}" (${latestArticle.pubDate})`);
-    }
-
+        
     const processedItems = feed.items.map((item: any, index: number) => {
-      // Enhanced content extraction
+      // Enhanced content extraction - check multiple possible fields
       let content = item.content || item["content:encoded"] || item.description || "";
+      
+      // Create a better description from content if the original description is too short
+      let description = item.description || "";
+      
+      // If description is very short (like "Hi!"), extract from content
+      if (description && description.length < 50 && content) {
+        // Remove HTML tags and get first 200 characters as description
+        const plainText = content.replace(/<[^>]*>/g, "").trim();
+        description = plainText.length > 200 
+          ? plainText.substring(0, 200) + "..." 
+          : plainText;
+      }
       
       // Enhanced image extraction
       let image = "";
@@ -71,11 +74,20 @@ export async function getSubstackRSS(): Promise<FeedItem[]> {
         date = new Date().toISOString();
       }
 
+      // Debug logging to see what we're getting
+      console.log("RSS Item Debug:", {
+        title: item.title,
+        description: item.description,
+        content: content ? content.substring(0, 100) + "..." : "No content",
+        contentLength: content.length,
+        hasContentEncoded: !!item["content:encoded"]
+      });
+
       return {
         title: item.title?.trim() || `Untitled Article ${index + 1}`,
         link: item.link?.trim() || "",
         date: date,
-        description: (item.description || "").replace(/<[^>]*>/g, "").trim(),
+        description: (description || "").replace(/<[^>]*>/g, "").trim(),
         content: content.trim(),
         image: image.trim(),
         author: author.trim(),
@@ -83,12 +95,10 @@ export async function getSubstackRSS(): Promise<FeedItem[]> {
     });
 
     // Sort by date (newest first)
-    const sortedItems = processedItems.sort((a, b) => 
+    const sortedItems = processedItems.sort((a: FeedItem, b: FeedItem) => 
       new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
-    console.log(`🎯 Processed and sorted ${sortedItems.length} articles`);
-    
     return sortedItems;
 
   } catch (err: any) {
@@ -140,7 +150,6 @@ export async function checkRSSFeedHealth(): Promise<{
 
 // Optional: Add a function to force refresh RSS cache
 export async function forceRefreshRSS(): Promise<FeedItem[]> {
-  console.log("🔄 Force refreshing RSS feed...");
   
   // Add multiple cache-busting parameters
   const timestamp = Date.now();
@@ -153,6 +162,7 @@ export async function forceRefreshRSS(): Promise<FeedItem[]> {
         ["content:encoded", "content"],
         ["enclosure", "enclosure"],
         ["dc:creator", "author"],
+        ["author", "authorAlt"],
       ],
     },
     timeout: 15000, // Longer timeout for force refresh
@@ -166,18 +176,29 @@ export async function forceRefreshRSS(): Promise<FeedItem[]> {
   try {
     const rssUrl = `https://sujitgouda.substack.com/feed?refresh=${timestamp}&r=${random}`;
     const feed = await parser.parseURL(rssUrl);
-    
-    console.log(`🚀 Force refresh completed - found ${feed.items.length} articles`);
-    
-    return feed.items.map((item: any) => ({
-      title: item.title ?? "",
-      link: item.link ?? "",
-      date: item.pubDate ?? "",
-      description: item.description ?? "",
-      content: item.content ?? "",
-      image: item.enclosure?.url ?? "",
-      author: item.author ?? "Sujit Gouda",
-    }));
+      
+    return feed.items.map((item: any, index: number) => {
+      // Use the same content extraction logic as the main function
+      let content = item.content || item["content:encoded"] || item.description || "";
+      
+      let description = item.description || "";
+      if (description && description.length < 50 && content) {
+        const plainText = content.replace(/<[^>]*>/g, "").trim();
+        description = plainText.length > 200 
+          ? plainText.substring(0, 200) + "..." 
+          : plainText;
+      }
+
+      return {
+        title: item.title?.trim() || `Untitled Article ${index + 1}`,
+        link: item.link?.trim() || "",
+        date: item.pubDate || item.isoDate || new Date().toISOString(),
+        description: (description || "").replace(/<[^>]*>/g, "").trim(),
+        content: content.trim(),
+        image: item.enclosure?.url?.trim() || "",
+        author: (item.author || item["dc:creator"] || "Sujit Gouda").trim(),
+      };
+    });
     
   } catch (err: any) {
     console.error("❌ Force refresh failed:", err.message);

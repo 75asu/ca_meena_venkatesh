@@ -21,8 +21,8 @@ const calculateReadingTime = (content: string) => {
 };
 
 // Updated to handle Promise-based params
-export default async function Page(props: { 
-  params: Promise<{ slug: string }> 
+export default async function Page(props: {
+  params: Promise<{ slug: string }>
 }) {
   // Await the params Promise
   const { slug } = await props.params;
@@ -39,8 +39,8 @@ export default async function Page(props: {
       <div className="max-w-4xl mx-auto px-6">
         {/* Back Navigation */}
         <div className="mb-8">
-          <Link 
-            href="/articles" 
+          <Link
+            href="/articles"
             className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm font-medium"
           >
             <HiArrowLeft size={16} /> Back to Articles
@@ -66,10 +66,10 @@ export default async function Page(props: {
           </div>
 
           <div className="mb-8">
-            <a 
-              href={post.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={post.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-purple-400 hover:text-purple-300 rounded-lg border border-gray-700 hover:border-gray-600 transition-all duration-300 text-sm font-medium"
             >
               <HiExternalLink size={16} /> View Original
@@ -92,42 +92,17 @@ export default async function Page(props: {
         </header>
 
         {/* Content */}
-        {post.description && (
+        {post.description && post.description.length > 50 && (
           <div className="bg-gray-800 rounded-xl p-6 mb-8 border border-gray-700">
             <h2 className="text-lg font-semibold text-gray-100 mb-3">Summary</h2>
             <p className="text-gray-300 leading-relaxed italic">{post.description}</p>
           </div>
         )}
-        
-        <div 
-          className="prose prose-invert prose-lg max-w-none text-gray-300 font-semibold" 
-          dangerouslySetInnerHTML={{ __html: post.content }} 
-        />
 
-        {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-gray-700">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-center sm:text-left">
-              <p className="text-gray-400 text-sm">
-                Originally published on{" "}
-                <a 
-                  href={post.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-purple-400 hover:text-purple-300"
-                >
-                  {new URL(post.link).hostname}
-                </a>
-              </p>
-            </div>
-            <Link 
-              href="/articles" 
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl"
-            >
-              More Articles <HiArrowLeft size={16} className="rotate-180" />
-            </Link>
-          </div>
-        </footer>
+        <div
+          className="prose prose-invert prose-lg max-w-none text-gray-300 font-semibold"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </div>
     </article>
   );
